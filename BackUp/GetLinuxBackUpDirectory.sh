@@ -14,7 +14,7 @@ echo HST: $HST
 
 mkdir -p "$DST" && \
 mkdir -p "$HST" && \
-rsync -arvL --exclude={"/var/lib/mlocate","/var/mail","/var/log","/var/lib/ispell","/var/lib/dpkg","/var/lib/apt","/var/cache","/bin","/boot","/dev","/initrd*","/lib*","/mount","/sbin","/srv","/usr","vmlinuz*","/proc","/sys","/tmp","/run","/mnt","/media","/lost+found","/Storage"} --delete-after --delete -b --backup-dir="$HST" "$SRC" "$DST" && \
+rsync -arv --safe-links --exclude={"/var/lib/mlocate","/var/mail","/var/log","/var/lib/ispell","/var/lib/dpkg","/var/lib/apt","/var/cache","/bin","/boot","/dev","/initrd*","/lib*","/mount","/sbin","/srv","/usr","vmlinuz*","/proc","/sys","/tmp","/run","/mnt","/media","/lost+found","/Storage"} --delete-after --delete -b --backup-dir="$HST" "$SRC" "$DST" && \
 find "$HST" -type f -iname "*.bz2" -exec bunzip2 -fv "{}" \; && \
 fdupes -drNI "$HST" && \
 find "$HST" -type f ! -name "*.gz" ! -name "*.bz2" -exec gzip -fv "{}" \; && \
