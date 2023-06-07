@@ -2,6 +2,8 @@
 SRC_HOST=$1
 ssh-copy-id $SRC_HOST
 
+ssh $SRC_HOST "rmdir /Storage/Master/* 2> /dev/null"
+
 for SRC_NAME in $(ssh $SRC_HOST "ls /Storage/Master/")
 do
 
