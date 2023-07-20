@@ -9,7 +9,6 @@ touch /etc/postfix/virtual_mailbox_domains
 cat /etc/postfix/virtual_mailbox_maps | cut -d' ' -f1 | cut -d'@' -f2 | sort | uniq > /etc/postfix/virtual_mailbox_domains
 
 postmap /etc/postfix/virtual_mailbox_maps
-postmap /etc/postfix/virtual_mailbox_domains
 
 postconf 'virtual_minimum_uid = 1000'
 postconf 'virtual_uid_maps = static:5000'
