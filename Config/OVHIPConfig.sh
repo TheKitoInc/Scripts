@@ -6,6 +6,7 @@ if [ "$#" -ne 5 ]; then
     exit 1
 fi
 
+mkdir -p /etc/network/interfaces.d/
 
 NIC=$1
 IPv4=$2
@@ -37,6 +38,21 @@ iface $NIC inet6 static
         pre-down /sbin/ip -6 route del default via $IPv6GW dev $NIC || true
         pre-down /sbin/ip -6 route del $IPv6GW dev $NIC || true
 " > /etc/network/interfaces.d/$NIC-v6
+
+
+echo "#!/bin/bash
+
+/sbin/ip -4 addr add $IPv4/32 dev $NIC
+/sbin/ip -4 route add $IPv4GW dev $NIC
+/sbin/ip -4 route add default via $IPv4GW dev $NIC
+
+/sbin/ip -6 addr  add $IPv6/128 dev $NIC
+/sbin/ip -6 route add $IPv6GW   dev $NIC
+/sbin/ip -6 route add default   via $IPv6GW dev $NIC
+
+" > /opt/kito/scripts/net-$NIC.sh
+
+chmod +x /opt/kito/scripts/net-$NIC.sh
 
 
 echo "network: {config: disabled}" > /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg
