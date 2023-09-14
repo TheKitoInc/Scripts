@@ -103,7 +103,7 @@ postmap /etc/postfix/virtual_alias_maps
 
 #MailBox
 groupadd -g 5000 vmail
-useradd -u 5000 -g vmail -s /usr/bin/nologin -d  /var/mail/maildir/ -m vmail
+useradd -u 5000 -g vmail -s /usr/sbin/nologin -d  /var/mail/maildir/ -m vmail
 
 touch /etc/postfix/virtual_mailbox_maps
 postmap /etc/postfix/virtual_mailbox_maps
