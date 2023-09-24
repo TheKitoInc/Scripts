@@ -106,4 +106,5 @@ dev tunUDPv6
 
 status /var/log/openvpn-statusUDPv6.log
 
+
 " > /etc/openvpn/serverUDPv6.conf
