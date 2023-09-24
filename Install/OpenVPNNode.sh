@@ -97,7 +97,6 @@ dev tunTCPv6
 status /var/log/openvpn-statusTCPv6.log
 
 
-"
 " > /etc/openvpn/serverTCPv6.conf
 
 echo "$CONFIGBASE
