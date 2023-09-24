@@ -7,7 +7,7 @@ PKI=/etc/openvpn
 HOST=$(hostname --fqdn)
 
 HOST=${HOST^^}
-CNClient=$($HOST | cut -d. -f1)
+CNClient=$(echo $HOST | cut -d. -f1)
 
 HOST=${HOST,,}
 CNServer=$CNClient.$(hostname --fqdn | cut -d. -f2-255)
