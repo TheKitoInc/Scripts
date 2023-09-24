@@ -1,5 +1,14 @@
 #/bin/bash
 
+if [ "$#" -ne 1 ]; then
+    echo "Illegal number of parameters: nodeID"
+    exit 1
+fi
+
+NODEID=$1
+NODENET=10.128.$(( 4*$NODEID  ))
+NODEMSK=255.255.255.252
+
 export DEBIAN_FRONTEND=noninteractive;
 export EASYRSA_BATCH=1
 
@@ -39,3 +48,24 @@ apt-get install easy-rsa -y || exit 3
 [ ! -f "/etc/openvpn/update-resolv-conf" ] || (rm "/etc/openvpn/update-resolv-conf") || exit 17
 
 (cat /etc/sysctl.conf | grep "net.ipv4.ip_forward = 1") || (echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.conf && sysctl -p /etc/sysctl.conf)
+
+CONFIGBASE=$(echo "
+port 1194
+topology subnet
+
+ca      $PKI/pki/issued/ca.crt
+cert    $PKI/pki/issued/server.crt
+key     $PKI/private/server.key
+dh      $PKI/pki/dh.pem
+
+keepalive 5 10
+persist-key
+persist-tun
+verb 3
+
+client-config-dir /etc/openvpn/ccd
+ccd-exclusive
+
+cipher AES-256-CBC
+data-ciphers AES-256-CBC
+")
