@@ -77,6 +77,7 @@ dev tunTCPv4
 
 status /var/log/openvpn-statusTCPv4.log
 "
+" > /etc/openvpn/serverTCPv4.conf.dis
 
 echo "$CONFIGBASE
 
@@ -86,6 +87,7 @@ dev tunUDPv4
 status /var/log/openvpn-statusUDPv4.log
 
 "
+" > /etc/openvpn/serverUDPv4.conf.dis
 
 echo "$CONFIGBASE
 
@@ -96,6 +98,7 @@ status /var/log/openvpn-statusTCPv6.log
 
 
 "
+" > /etc/openvpn/serverTCPv6.conf
 
 echo "$CONFIGBASE
 
