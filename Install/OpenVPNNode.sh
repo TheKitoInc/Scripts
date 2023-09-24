@@ -87,6 +87,7 @@ push \"route $NODENET $NODEMSK $NODENETA.1 4\"
 push \"route 10.128.0.0 255.255.0.0 $NODENETA.1 14\"
 
 push \"route 192.168.0.0 255.255.0.0 $NODENETA.1 24\"
+push \"route 172.16.0.0 255.240.0.0 $NODENETA.1 24\"
 " > /etc/openvpn/serverTCPv4.conf.dis
 
 echo "$CONFIGBASE
@@ -101,6 +102,7 @@ push \"route $NODENET $NODEMSK $NODENETB.1 3\"
 push \"route 10.128.0.0 255.255.0.0 $NODENETB.1 13\"
 
 push \"route 192.168.0.0 255.255.0.0 $NODENETB.1 23\"
+push \"route 172.16.0.0 255.240.0.0 $NODENETB.1 23\"
 " > /etc/openvpn/serverUDPv4.conf.dis
 
 echo "$CONFIGBASE
@@ -115,6 +117,7 @@ push \"route $NODENET $NODEMSK $NODENETC.1 2\"
 push \"route 10.128.0.0 255.255.0.0 $NODENETC.1 12\"
 
 push \"route 192.168.0.0 255.255.0.0 $NODENETC.1 22\"
+push \"route 172.16.0.0 255.240.0.0 $NODENETC.1 22\"
 " > /etc/openvpn/serverTCPv6.conf
 
 echo "$CONFIGBASE
@@ -129,4 +132,5 @@ push \"route $NODENET $NODEMSK $NODENETD.1 1\"
 push \"route 10.128.0.0 255.255.0.0 $NODENETD.1 11\"
 
 push \"route 192.168.0.0 255.255.0.0 $NODENETD.1 21\"
+push \"route 172.16.0.0 255.240.0.0 $NODENETD.1 21\"
 " > /etc/openvpn/serverUDPv6.conf
