@@ -69,3 +69,39 @@ ccd-exclusive
 cipher AES-256-CBC
 data-ciphers AES-256-CBC
 ")
+
+echo "$CONFIGBASE
+
+proto tcp-server
+dev tunTCPv4
+
+status /var/log/openvpn-statusTCPv4.log
+"
+
+echo "$CONFIGBASE
+
+proto udp
+dev tunUDPv4
+
+status /var/log/openvpn-statusUDPv4.log
+
+"
+
+echo "$CONFIGBASE
+
+proto tcp6-server
+dev tunTCPv6
+
+status /var/log/openvpn-statusTCPv6.log
+
+
+"
+
+echo "$CONFIGBASE
+
+proto udp6
+dev tunUDPv6
+
+status /var/log/openvpn-statusUDPv6.log
+
+"
