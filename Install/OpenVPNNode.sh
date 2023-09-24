@@ -86,7 +86,7 @@ dev tunUDPv4
 
 status /var/log/openvpn-statusUDPv4.log
 
-"
+
 " > /etc/openvpn/serverUDPv4.conf.dis
 
 echo "$CONFIGBASE
