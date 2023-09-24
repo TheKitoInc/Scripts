@@ -76,7 +76,8 @@ proto tcp-server
 dev tunTCPv4
 
 status /var/log/openvpn-statusTCPv4.log
-"
+
+
 " > /etc/openvpn/serverTCPv4.conf.dis
 
 echo "$CONFIGBASE
