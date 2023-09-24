@@ -4,8 +4,13 @@ export DEBIAN_FRONTEND=noninteractive;
 
 EASYRSA=/usr/share/easy-rsa/easyrsa
 PKI=/etc/openvpn
-CNClient=$(hostname -s)
-CNServer=$(hostname -f)
+HOST=$(hostname --fqdn)
+
+HOST=${HOST^^}
+CNClient=$($HOST | cut -d. -f1)
+
+HOST=${HOST,,}
+CNServer=$CNClient.$(hostname --fqdn | cut -d. -f2-255)
 
 apt-get update || exit 1
 apt-get install openvpn -y || exit 2
