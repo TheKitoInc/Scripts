@@ -4,7 +4,7 @@ export DEBIAN_FRONTEND=noninteractive;
 
 EASYRSA=/usr/share/easy-rsa/easyrsa
 PKI=/etc/openvpn
-CNClient=$(hostname)
+CNClient=$(hostname -s)
 CNServer=$(hostname -f)
 
 apt-get update || exit 1
