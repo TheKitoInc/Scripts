@@ -82,6 +82,7 @@ dev tunTCPv4
 
 status /var/log/openvpn-statusTCPv4.log
 
+server $NODEIPA 255.255.255.0
 
 " > /etc/openvpn/serverTCPv4.conf.dis
 
@@ -92,6 +93,7 @@ dev tunUDPv4
 
 status /var/log/openvpn-statusUDPv4.log
 
+server $NODEIPB 255.255.255.0
 
 " > /etc/openvpn/serverUDPv4.conf.dis
 
@@ -102,6 +104,7 @@ dev tunTCPv6
 
 status /var/log/openvpn-statusTCPv6.log
 
+server $NODEIPC 255.255.255.0
 
 " > /etc/openvpn/serverTCPv6.conf
 
@@ -112,5 +115,6 @@ dev tunUDPv6
 
 status /var/log/openvpn-statusUDPv6.log
 
+server $NODEIPD 255.255.255.0
 
 " > /etc/openvpn/serverUDPv6.conf
