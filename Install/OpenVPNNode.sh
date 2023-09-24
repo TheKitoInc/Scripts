@@ -17,6 +17,9 @@ NODENETD=10.128.$(( 4*$NODEID + 3))
 export DEBIAN_FRONTEND=noninteractive;
 export EASYRSA_BATCH=1
 
+PORTIP6=1194
+PORTIP4=1195
+
 EASYRSA=/usr/share/easy-rsa/easyrsa
 PKI=/etc/openvpn
 HOST=$(hostname --fqdn)
