@@ -12,8 +12,8 @@ apt-get install openvpn -y || exit 2
 apt-get install easy-rsa -y || exit 3
 
 [ -d "$PKI/pki" ] || (cd "$PKI" && $EASYRSA init-pki) || exit 4
-[ -f "$PKI/pki/dh.pem" ] || (cd "$PKI" && $EASYRSA gen-dh) || exit 5 
- 
+[ -f "$PKI/pki/dh.pem" ] || (cd "$PKI" && $EASYRSA gen-dh) || exit 5
+
 [ -f "$PKI/pki/reqs/$CNClient.req" ] || (cd "$PKI" && $EASYRSA gen-req $CNClient nopass) || exit 6
 [ -f "$PKI/pki/reqs/$CNServer.req" ] || (cd "$PKI" && $EASYRSA gen-req $CNServer nopass) || exit 7
 
