@@ -60,7 +60,6 @@ apt-get install php-cli -y || exit 4
 (cat /etc/sysctl.conf | grep "net.ipv4.ip_forward = 1") || (echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.conf && sysctl -p /etc/sysctl.conf) || exit 20
 
 CONFIGBASE=$(echo "
-port 1194
 topology subnet
 
 ca      $PKI/pki/issued/ca.crt
@@ -82,6 +81,7 @@ data-ciphers AES-256-CBC
 
 echo "$CONFIGBASE
 
+port $PORTIP4
 proto tcp-server
 dev tunTCPv4
 
@@ -98,6 +98,7 @@ push \"route 10.0.0.0 255.0.0.0 $NODENETA.1 24\"
 
 echo "$CONFIGBASE
 
+port $PORTIP4
 proto udp
 dev tunUDPv4
 
@@ -114,6 +115,7 @@ push \"route 10.0.0.0 255.0.0.0 $NODENETB.1 23\"
 
 echo "$CONFIGBASE
 
+port $PORTIP6
 proto tcp6-server
 dev tunTCPv6
 
@@ -130,6 +132,7 @@ push \"route 10.0.0.0 255.0.0.0 $NODENETC.1 22\"
 
 echo "$CONFIGBASE
 
+port $PORTIP6
 proto udp6
 dev tunUDPv6
 
