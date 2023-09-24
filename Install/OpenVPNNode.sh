@@ -38,3 +38,4 @@ apt-get install easy-rsa -y || exit 3
 [ ! -d "/etc/openvpn/client" ] || (rmdir "/etc/openvpn/client") || exit 16
 [ ! -f "/etc/openvpn/update-resolv-conf" ] || (rm "/etc/openvpn/update-resolv-conf") || exit 17
 
+(cat /etc/sysctl.conf | grep "net.ipv4.ip_forward = 1") || (echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.conf && sysctl -p /etc/sysctl.conf)
