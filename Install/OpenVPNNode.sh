@@ -6,7 +6,7 @@ if [ "$#" -ne 1 ]; then
 fi
 
 NODEID=$1
-NODENET=10.128.$(( 4*$NODEID  ))
+NODENET=10.128.$(( 4*$NODEID )).0
 NODEMSK=255.255.255.252
 
 export DEBIAN_FRONTEND=noninteractive;
