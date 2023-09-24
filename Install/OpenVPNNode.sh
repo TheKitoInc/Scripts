@@ -64,7 +64,7 @@ topology subnet
 
 ca      $PKI/pki/issued/ca.crt
 cert    $PKI/pki/issued/server.crt
-key     $PKI/private/server.key
+key     $PKI/pki/private/server.key
 dh      $PKI/pki/dh.pem
 
 keepalive 5 10
