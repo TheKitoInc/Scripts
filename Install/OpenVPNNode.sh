@@ -30,7 +30,7 @@ CNServer=$CNClient.$(hostname --fqdn | cut -d. -f2-255)
 apt-get update || exit 1
 apt-get install openvpn -y || exit 2
 apt-get install easy-rsa -y || exit 3
-apt-get install php-cli -y || exit 5
+apt-get install php-cli -y || exit 4
 
 [ -d "$PKI/pki" ] || (cd "$PKI" && $EASYRSA init-pki) || exit 5
 [ -f "$PKI/pki/dh.pem" ] || (cd "$PKI" && $EASYRSA gen-dh) || exit 6
