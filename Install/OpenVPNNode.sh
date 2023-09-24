@@ -84,6 +84,7 @@ status /var/log/openvpn-statusTCPv4.log
 
 server $NODENETA.0 255.255.255.0
 push \"route $NODENET $NODEMSK $NODENETA.1 4\"
+push \"route 10.128.0.0 255.255.0.0 $NODENETA.1 14\"
 
 " > /etc/openvpn/serverTCPv4.conf.dis
 
@@ -96,6 +97,7 @@ status /var/log/openvpn-statusUDPv4.log
 
 server $NODENETB.0 255.255.255.0
 push \"route $NODENET $NODEMSK $NODENETB.1 3\"
+push \"route 10.128.0.0 255.255.0.0 $NODENETB.1 13\"
 
 " > /etc/openvpn/serverUDPv4.conf.dis
 
@@ -108,6 +110,7 @@ status /var/log/openvpn-statusTCPv6.log
 
 server $NODENETC.0 255.255.255.0
 push \"route $NODENET $NODEMSK $NODENETC.1 2\"
+push \"route 10.128.0.0 255.255.0.0 $NODENETC.1 12\"
 
 " > /etc/openvpn/serverTCPv6.conf
 
@@ -120,5 +123,6 @@ status /var/log/openvpn-statusUDPv6.log
 
 server $NODENETD.0 255.255.255.0
 push \"route $NODENET $NODEMSK $NODENETD.1 1\"
+push \"route 10.128.0.0 255.255.0.0 $NODENETD.1 11\"
 
 " > /etc/openvpn/serverUDPv6.conf
