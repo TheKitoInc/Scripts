@@ -53,7 +53,7 @@ apt-get install easy-rsa -y || exit 3
 [ ! -f "/etc/openvpn/update-resolv-conf" ] || (rm "/etc/openvpn/update-resolv-conf") || exit 17
 [ -d "/etc/openvpn/ccd" ] || (mkdir "/etc/openvpn/ccd") || exit 18
 
-(cat /etc/sysctl.conf | grep "net.ipv4.ip_forward = 1") || (echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.conf && sysctl -p /etc/sysctl.conf)
+(cat /etc/sysctl.conf | grep "net.ipv4.ip_forward = 1") || (echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.conf && sysctl -p /etc/sysctl.conf) || exit 19
 
 CONFIGBASE=$(echo "
 port 1194
