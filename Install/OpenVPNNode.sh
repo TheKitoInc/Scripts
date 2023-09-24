@@ -1,6 +1,7 @@
 #/bin/bash
 
 export DEBIAN_FRONTEND=noninteractive;
+export EASYRSA_BATCH=1
 
 EASYRSA=/usr/share/easy-rsa/easyrsa
 PKI=/etc/openvpn
