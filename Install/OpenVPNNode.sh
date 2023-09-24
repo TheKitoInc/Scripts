@@ -34,3 +34,7 @@ apt-get install easy-rsa -y || exit 3
 [ -L "$PKI/pki/issued/client.crt" ] || (cd "$PKI/pki/issued/" && ln -s $CNClient.crt client.crt) || exit 13
 [ -L "$PKI/pki/issued/server.crt" ] || (cd "$PKI/pki/issued/" && ln -s $CNServer.crt server.crt) || exit 14
 
+[ ! -d "/etc/openvpn/server" ] || (rmdir "/etc/openvpn/server") || exit 15
+[ ! -d "/etc/openvpn/client" ] || (rmdir "/etc/openvpn/client") || exit 16
+[ ! -f "/etc/openvpn/update-resolv-conf" ] || (rm "/etc/openvpn/update-resolv-conf") || exit 17
+
