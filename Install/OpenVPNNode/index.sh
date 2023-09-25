@@ -19,6 +19,7 @@ export EASYRSA_BATCH=1
 
 PORTIP6=1194
 PORTIP4=1195
+URLFiles=https://raw.githubusercontent.com/TheKito/Scripts/main/Install/OpenVPNNode
 
 EASYRSA=/usr/share/easy-rsa/easyrsa
 PKI=/etc/openvpn
@@ -31,8 +32,8 @@ HOST=${HOST,,}
 CNServer=$CNClient.$(echo $HOST| cut -d. -f2-255)
 
 apt-get update || exit 1
-apt-get install openvpn -y || exit 2
-apt-get install easy-rsa -y || exit 3
+apt-get install openvpn easy-rsa -y || exit 2
+apt-get install curl -y || exit 3
 apt-get install php-cli -y || exit 4
 
 [ -d "$PKI/pki" ] || (cd "$PKI" && $EASYRSA init-pki) || exit 5
@@ -146,3 +147,10 @@ push \"route 192.168.0.0 255.255.0.0 $NODENETD.1 21\"
 push \"route 172.16.0.0 255.240.0.0 $NODENETD.1 21\"
 push \"route 10.0.0.0 255.0.0.0 $NODENETD.1 21\"
 " > /etc/openvpn/serverUDPv6.conf || exit 24
+
+[ -d "/opt/" ] || (mkdir "/opt/") || exit 25
+[ -d "/opt/kito/" ] || (mkdir "/opt/kito/") || exit 26
+[ -d "/opt/kito/ovpn/" ] || (mkdir "/opt/kito/ovpn/") || exit 27
+
+curl "$URLFiles/ovpn2json.php" > /opt/kito/ovpn/ovpn2json.php  || exit 28
+curl "$URLFiles/ovpn2json2route.php" > /opt/kito/ovpn/ovpn2json2route.php  || exit 28
