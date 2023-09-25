@@ -152,6 +152,9 @@ foreach(getKernelRoutes() as $route)
         $router = $route['router'];
         $network = $route['network'];
 
-//      if(!checkRouteInOVPN($router,$network))
-//TODO: remove route from kernel table
+
+      if(!checkRouteInOVPN($router,$network))
+        print_r($route);
+
+//              exec("route add -net $network gw $router metric 2");
 }
