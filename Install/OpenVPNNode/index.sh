@@ -154,3 +154,7 @@ push \"route 10.0.0.0 255.0.0.0 $NODENETD.1 21\"
 
 curl "$URLFiles/ovpn2json.php" > /opt/kito/ovpn/ovpn2json.php  || exit 28
 curl "$URLFiles/ovpn2json2route.php" > /opt/kito/ovpn/ovpn2json2route.php  || exit 29
+
+
+cat /etc/crontab | grep "/opt/kito/ovpn/ovpn2json.php" || (echo "* *      * * * root    /usr/bin/php /opt/kito/ovpn/ovpn2json.php" >> /etc/crontab) && (/etc/init.d/cron reload)) || exit 30
+cat /etc/crontab | grep "/opt/kito/ovpn/ovpn2json2route.php" || (echo "* *      * * * root    /usr/bin/php /opt/kito/ovpn/ovpn2json2route.php" >> /etc/crontab) && (/etc/init.d/cron reload)) || exit 31
