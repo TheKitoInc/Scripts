@@ -28,7 +28,7 @@ HOST=${HOST^^}
 CNClient=$(echo $HOST | cut -d. -f1)
 
 HOST=${HOST,,}
-CNServer=$CNClient.$(hostname --fqdn | cut -d. -f2-255)
+CNServer=$CNClient.$(echo $HOST| cut -d. -f2-255)
 
 apt-get update || exit 1
 apt-get install openvpn -y || exit 2
