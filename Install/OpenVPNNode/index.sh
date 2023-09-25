@@ -153,4 +153,4 @@ push \"route 10.0.0.0 255.0.0.0 $NODENETD.1 21\"
 [ -d "/opt/kito/ovpn/" ] || (mkdir "/opt/kito/ovpn/") || exit 27
 
 curl "$URLFiles/ovpn2json.php" > /opt/kito/ovpn/ovpn2json.php  || exit 28
-curl "$URLFiles/ovpn2json2route.php" > /opt/kito/ovpn/ovpn2json2route.php  || exit 28
+curl "$URLFiles/ovpn2json2route.php" > /opt/kito/ovpn/ovpn2json2route.php  || exit 29
