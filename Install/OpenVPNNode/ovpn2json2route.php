@@ -154,6 +154,5 @@ foreach(getKernelRoutes() as $route)
 
       if(!checkRouteInOVPN($router,$network))
 //        print_r($route);
-
-              exec("route del -net $network gw $router metric 2");
+        exec("route del -net $network gw $router metric 2");
 }
