@@ -91,6 +91,7 @@ function getOVPNRoutes() : array
 
         if($routes === null)
         {
+                $routes = array();
                 $data = json_decode(file_get_contents('/var/log/openvpn.json'), true);
                 foreach($data as $ip_port => $subData)
                 {
