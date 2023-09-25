@@ -34,6 +34,9 @@ function getKernelRoutes() : array
                 foreach($routes as $index => $route)
                 {
 
+                        if(!str_contains($route,"tunTCP") && !str_contains($route,"tunUDP"))
+                                continue;
+
                         $_ = array();
 
                         foreach (explode(' ',$route) as $item)
