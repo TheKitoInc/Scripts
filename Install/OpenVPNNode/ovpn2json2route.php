@@ -51,8 +51,8 @@ function getKernelRoutes() : array
                                         $_['router'] = $item;
                                 elseif(isNetwork($item))
                                         $_['network'] = $item;
-//                              else
-//                                      $_[] = $item;
+                              else
+                                      $_[] = $item;
                         }
 
 
@@ -88,7 +88,6 @@ function checkRouteInOVPN($router, $network) : bool
 function getOVPNRoutes() : array
 {
         static $routes = null;
-
         if($routes === null)
         {
                 $routes = array();
