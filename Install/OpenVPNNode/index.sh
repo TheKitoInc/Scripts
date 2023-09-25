@@ -75,9 +75,6 @@ verb 3
 
 client-config-dir /etc/openvpn/ccd
 ccd-exclusive
-
-cipher AES-256-CBC
-data-ciphers AES-256-CBC
 ")
 
 echo "$CONFIGBASE
