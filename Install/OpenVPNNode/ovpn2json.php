@@ -3,8 +3,8 @@
 $files = array(
     '/var/log/openvpn-statusTCPv6.log',
     '/var/log/openvpn-statusUDPv6.log',
-//    '/var/log/openvpn-statusTCPv4.log',
-//    '/var/log/openvpn-statusUDPv4.log',
+    '/var/log/openvpn-statusTCPv4.log',
+    '/var/log/openvpn-statusUDPv4.log',
 );
 $json = '/var/log/openvpn.json';
 
