@@ -30,8 +30,9 @@ function getKernelRoutes() : array
 
         if($routes === null)
         {
-                exec ('ip route', $routes);
-                foreach($routes as $index => $route)
+                $routes = array();
+                exec ('ip route', $__);
+                foreach($__ as $route)
                 {
 
                         if(!str_contains($route,"tunTCP") && !str_contains($route,"tunUDP"))
@@ -55,7 +56,10 @@ function getKernelRoutes() : array
                         }
 
 
-                        $routes[$index] = $_;
+
+                        if(isset($_['router']) && $_['network'] && explode('.',$_['router'])[3] != 1)
+                                $routes[] = $_;
+
                 }
         }
 
