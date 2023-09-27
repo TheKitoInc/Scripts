@@ -145,13 +145,15 @@ push \"route 172.16.0.0 255.240.0.0 $NODENETD.1 21\"
 push \"route 10.0.0.0 255.0.0.0 $NODENETD.1 21\"
 " > /etc/openvpn/serverUDPv6.conf || exit 24
 
-[ -d "/opt/" ] || (mkdir "/opt/") || exit 25
-[ -d "/opt/kito/" ] || (mkdir "/opt/kito/") || exit 26
-[ -d "/opt/kito/ovpn/" ] || (mkdir "/opt/kito/ovpn/") || exit 27
+echo "iroute $NODENET $NODEMSK" > /etc/openvpn/ccd/$CNClient  || exit 25
 
-curl "$URLFiles/ovpn2json.php" > /opt/kito/ovpn/ovpn2json.php  || exit 28
-curl "$URLFiles/ovpn2json2route.php" > /opt/kito/ovpn/ovpn2json2route.php  || exit 29
+[ -d "/opt/" ] || (mkdir "/opt/") || exit 26
+[ -d "/opt/kito/" ] || (mkdir "/opt/kito/") || exit 27
+[ -d "/opt/kito/ovpn/" ] || (mkdir "/opt/kito/ovpn/") || exit 28
+
+curl "$URLFiles/ovpn2json.php" > /opt/kito/ovpn/ovpn2json.php  || exit 29
+curl "$URLFiles/ovpn2json2route.php" > /opt/kito/ovpn/ovpn2json2route.php  || exit 30
 
 
-cat /etc/crontab | grep "/opt/kito/ovpn/ovpn2json.php" || (echo "* *      * * * root    /usr/bin/php /opt/kito/ovpn/ovpn2json.php" >> /etc/crontab) && (/etc/init.d/cron reload) || exit 30
-cat /etc/crontab | grep "/opt/kito/ovpn/ovpn2json2route.php" || (echo "* *      * * * root    /usr/bin/php /opt/kito/ovpn/ovpn2json2route.php" >> /etc/crontab) && (/etc/init.d/cron reload) || exit 31
+cat /etc/crontab | grep "/opt/kito/ovpn/ovpn2json.php" || (echo "* *      * * * root    /usr/bin/php /opt/kito/ovpn/ovpn2json.php" >> /etc/crontab) && (/etc/init.d/cron reload) || exit 31
+cat /etc/crontab | grep "/opt/kito/ovpn/ovpn2json2route.php" || (echo "* *      * * * root    /usr/bin/php /opt/kito/ovpn/ovpn2json2route.php" >> /etc/crontab) && (/etc/init.d/cron reload) || exit 32
