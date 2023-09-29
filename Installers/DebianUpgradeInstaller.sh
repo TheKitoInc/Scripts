@@ -28,6 +28,10 @@ test -f /var/run/reboot-required && reboot
 chmod +x /opt/kito/scripts/upgradeSystem.sh
 
 apt-get install cron -y
+apt-get install rsync -y
+apt-get install net-tools -y
+apt-get install htop -y
+apt-get install tree -y
 
 cat /etc/crontab | grep "/opt/kito/scripts/upgradeSystem.sh"          || (echo "$(shuf -i 0-59 -n 1) $(shuf -i 0-23 -n 1)      * * $(shuf -i 0-6 -n 1) root    /opt/kito/scripts/upgradeSystem.sh" >> /etc/crontab) && (/etc/init.d/cron reload)
 
