@@ -28,6 +28,7 @@ test -f /var/run/reboot-required && reboot
 chmod +x /opt/kito/scripts/upgradeSystem.sh
 
 apt-get install cron -y
+apt-get install supervisor -y
 apt-get install rsync -y
 apt-get install net-tools -y
 apt-get install htop -y
