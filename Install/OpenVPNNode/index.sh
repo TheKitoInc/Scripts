@@ -32,7 +32,7 @@ HOST=${HOST,,}
 CNServer=$CNClient.$(echo $HOST| cut -d. -f2-255)
 
 apt-get update || exit 1
-apt-get install openvpn easy-rsa -y || exit 2
+apt-get install openvpn openvpn-dco-dkms easy-rsa -y || exit 2
 apt-get install curl -y || exit 3
 apt-get install php-cli -y || exit 4
 
