@@ -23,7 +23,7 @@ URLFiles=https://raw.githubusercontent.com/TheKito/Scripts/main/Install/OpenVPNN
 
 EASYRSA=/usr/share/easy-rsa/easyrsa
 PKI=/etc/openvpn
-HOST=$(hostname --fqdn)
+HOST=$(grep -m 1 . /etc/hostname)
 
 HOST=${HOST^^}
 CNClient=$(echo $HOST | cut -d. -f1)
