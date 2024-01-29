@@ -20,7 +20,7 @@ for d in $STR/*; do
 
         [ -s $LOG ] && STA=OK
         [ -s $LOG ] || STA=ERROR
-        cat $LOG | mutt -s "BackUp $STA Server $(hostname) Device $DEV" $(hostname)@$(cat /etc/mailname)
+#        cat $LOG | mutt -s "BackUp $STA Server $(hostname) Device $DEV" $(hostname)@$(cat /etc/mailname)
 
 done
 cat $ALMTMP.err $ALMTMP.log $ALMTMP.ext

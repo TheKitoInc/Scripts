@@ -50,6 +50,7 @@ echo "#!/bin/bash
 /sbin/ip -6 route add $IPv6GW   dev $NIC
 /sbin/ip -6 route add default   via $IPv6GW dev $NIC
 
+sleep 1
 " > /opt/kito/scripts/net-$NIC.sh
 
 chmod +x /opt/kito/scripts/net-$NIC.sh

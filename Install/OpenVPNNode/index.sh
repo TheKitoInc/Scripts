@@ -7,7 +7,7 @@ fi
 
 NODEID=$1
 NODENET=10.128.$(( 4*$NODEID )).0
-NODEMSK=255.255.255.252
+NODEMSK=255.255.252.0
 
 NODENETA=10.128.$(( 4*$NODEID + 0))
 NODENETB=10.128.$(( 4*$NODEID + 1))
@@ -23,7 +23,7 @@ URLFiles=https://raw.githubusercontent.com/TheKito/Scripts/main/Install/OpenVPNN
 
 EASYRSA=/usr/share/easy-rsa/easyrsa
 PKI=/etc/openvpn
-HOST=$(hostname --fqdn)
+HOST=$(grep -m 1 . /etc/hostname)
 
 HOST=${HOST^^}
 CNClient=$(echo $HOST | cut -d. -f1)
@@ -32,7 +32,7 @@ HOST=${HOST,,}
 CNServer=$CNClient.$(echo $HOST| cut -d. -f2-255)
 
 apt-get update || exit 1
-apt-get install openvpn easy-rsa -y || exit 2
+apt-get install openvpn openvpn-dco-dkms easy-rsa -y || exit 2
 apt-get install curl -y || exit 3
 apt-get install php-cli -y || exit 4
 
