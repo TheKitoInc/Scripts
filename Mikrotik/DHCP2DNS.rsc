@@ -118,13 +118,8 @@
 		  
 		  
 		:if ( [ :len $fullHost ] > 0) do={
-	
-	
-	
-	
-	
-	
-	
-	
+			/ip dns static remove numbers=[find name=$fullHost]
+			/ip dns static add name=$fullHost address=$dhcpIP;								
 		}
+
 	}
