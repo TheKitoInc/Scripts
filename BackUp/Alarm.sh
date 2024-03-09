@@ -1,6 +1,7 @@
 #!/bin/bash
 #No Changes Alarm
 STR=/Storage/Master/
+HST=/Storage/History/
 ALMTMP=/tmp/ALM
 cat /dev/null > $ALMTMP.err
 cat /dev/null > $ALMTMP.log
@@ -9,6 +10,7 @@ for d in $STR/*; do
         DEV=$(basename $d)
         LOG=/tmp/$DEV.log
         find "$d" -type f -mtime -7 -ls > $LOG
+        find "$HST/$DEV" -type f -mtime -7 -ls >> $LOG
         [ -s $LOG ] && echo "    OK     $DEV" >> $ALMTMP.log
         [ -s $LOG ] || echo "   ERROR   $DEV" >> $ALMTMP.err
                 echo "" >> $ALMTMP.ext
