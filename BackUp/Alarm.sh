@@ -28,4 +28,3 @@ done
 cat $ALMTMP.err $ALMTMP.log $ALMTMP.ext
 cat $ALMTMP.err $ALMTMP.log $ALMTMP.ext | mutt -s "BackUp Server $(hostname)" $(hostname)@$(cat /etc/mailname)
 
-sleep 86400
