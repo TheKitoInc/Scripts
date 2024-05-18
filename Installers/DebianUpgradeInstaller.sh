@@ -23,6 +23,8 @@ apt-get autoremove -y
 
 test -f /var/run/reboot-required && reboot
 
+exit 0
+
 " > /opt/kito/scripts/upgradeSystem.sh
 
 chmod +x /opt/kito/scripts/upgradeSystem.sh
