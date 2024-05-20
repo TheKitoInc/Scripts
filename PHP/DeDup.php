@@ -1,166 +1,173 @@
 <?php
-	$STORAGE_DATABASE = '/Storage/BLK050NAS002DAT001/HistoryStorage';
-	$STORAGE_SOURCE = '/Storage/BLK050NAS002DAT001/History';
 
-	process($STORAGE_DATABASE,$STORAGE_SOURCE);
+$STORAGE_DATABASE = '/Storage/BLK050NAS002DAT001/HistoryStorage';
+$STORAGE_SOURCE = '/Storage/BLK050NAS002DAT001/History';
 
-	function process($storageDatabase,$storageSource)
-	{
-		foreach(scandir($storageSource) as $name)
-		{
-			if($name === '.')
-				continue;
+process($STORAGE_DATABASE, $STORAGE_SOURCE);
 
-			if($name === '..')
-				continue;
+function process($storageDatabase, $storageSource)
+{
+    foreach(scandir($storageSource) as $name) {
+        if($name === '.') {
+            continue;
+        }
 
-			$subPath = $storageSource . '/' . $name;
+        if($name === '..') {
+            continue;
+        }
 
-			if(is_dir($subPath))
-				process($storageDatabase,$subPath);
+        $subPath = $storageSource . '/' . $name;
 
-			if(is_file($subPath))
-				processFile($storageDatabase,$subPath);
-		}
-	}
+        if(is_dir($subPath)) {
+            process($storageDatabase, $subPath);
+        }
 
-	function getFileUID($file)
-	{
-		if(!is_readable($file))
-			return;
+        if(is_file($subPath)) {
+            processFile($storageDatabase, $subPath);
+        }
+    }
+}
 
-		return strtoupper(sha1_file($file).'X'.md5_file($file).'X'.filesize($file));
-	}
+function getFileUID($file)
+{
+    if(!is_readable($file)) {
+        return;
+    }
 
-	function getPathFromUID($uid)
-	{
-		$chars = array();
-		foreach(str_split(strtoupper($uid)) as $char)
-		{
-			if(in_array($char,$chars))
-				continue;
+    return strtoupper(sha1_file($file).'X'.md5_file($file).'X'.filesize($file));
+}
 
-			$chars[] = $char;
+function getPathFromUID($uid)
+{
+    $chars = array();
+    foreach(str_split(strtoupper($uid)) as $char) {
+        if(in_array($char, $chars)) {
+            continue;
+        }
 
-		}
+        $chars[] = $char;
 
-		if(count($chars) % 2 !=0)
-			array_pop($chars);
+    }
 
-		$key = implode('',$chars);
+    if(count($chars) % 2 != 0) {
+        array_pop($chars);
+    }
 
-		return implode ('/',str_split($key,2));
-	}
+    $key = implode('', $chars);
 
-	function getFileDatabasePath($storageDatabase,$file)
-	{
-		$fileUID = getFileUID($file);
+    return implode('/', str_split($key, 2));
+}
 
-		if($fileUID===null)
-			return;
+function getFileDatabasePath($storageDatabase, $file)
+{
+    $fileUID = getFileUID($file);
 
-		$path = $storageDatabase.'/'.getPathFromUID($fileUID);
+    if($fileUID === null) {
+        return;
+    }
 
-		if(!is_dir($path))
-			mkdir($path,0777,true);
+    $path = $storageDatabase.'/'.getPathFromUID($fileUID);
 
-		return $path.'/'.$fileUID;
-	}
+    if(!is_dir($path)) {
+        mkdir($path, 0777, true);
+    }
 
-
-	function checkValidDataPath($storageDatabase,$dataPath)
-	{
-		$dataPathCheck = getFileDatabasePath($storageDatabase,$dataPath);
-
-                if($dataPath!=$dataPathCheck)
-                {
-                	rename($dataPath,$dataPathCheck);
-                        return false;
-                }
-
-		return true;
-	}
+    return $path.'/'.$fileUID;
+}
 
 
-	function compareFiles($file_a, $file_b)
-	{
-		if (filesize($file_a) != filesize($file_b))
-			return false;
+function checkValidDataPath($storageDatabase, $dataPath)
+{
+    $dataPathCheck = getFileDatabasePath($storageDatabase, $dataPath);
 
-		$fp_a = fopen($file_a, 'rb');
-		$fp_b = fopen($file_b, 'rb');
+    if($dataPath != $dataPathCheck) {
+        rename($dataPath, $dataPathCheck);
+        return false;
+    }
 
-		do
-		{
-			$b_a = fread($fp_a, 1024*1024);
-			$b_b = fread($fp_b, 1024*1024);
-
-			if ($b_a !== $b_b)
-			{
-				fclose($fp_a);
-				fclose($fp_b);
-				return false;
-			}
-
-		} while(strlen($b_a)>0 && strlen($b_b)>0);
-
-		fclose($fp_a);
-		fclose($fp_b);
-
-		return true;
-	}
-
-	function replaceFileForLink($linkSource,$linkDest)
-	{
-		$tmp = uniqid($linkDest);
-
-		if(!rename($linkDest,$tmp))
-			return;
-
-		if(!link($linkSource,$linkDest))
-		{
-			rename($tmp,$linkDest);
-			return;
-		}
-
-		unlink($tmp);
-
-		passthru('ls -l "'.$linkDest.'"');
-	}
-
-	function processFile($storageDatabase,$file)
-	{
-		$dataPath = getFileDatabasePath($storageDatabase,$file);
-
-		if($dataPath===null)
-			return;
-
-		if(!file_exists($dataPath))
-		{
-			copy($file,$dataPath);
-			chmod($file,0444);
-
-			return;
-		}
+    return true;
+}
 
 
-		if(!checkValidDataPath($storageDatabase,$dataPath))
-			return;
+function compareFiles($file_a, $file_b)
+{
+    if (filesize($file_a) != filesize($file_b)) {
+        return false;
+    }
+
+    $fp_a = fopen($file_a, 'rb');
+    $fp_b = fopen($file_b, 'rb');
+
+    do {
+        $b_a = fread($fp_a, 1024 * 1024);
+        $b_b = fread($fp_b, 1024 * 1024);
+
+        if ($b_a !== $b_b) {
+            fclose($fp_a);
+            fclose($fp_b);
+            return false;
+        }
+
+    } while(strlen($b_a) > 0 && strlen($b_b) > 0);
+
+    fclose($fp_a);
+    fclose($fp_b);
+
+    return true;
+}
+
+function replaceFileForLink($linkSource, $linkDest)
+{
+    $tmp = uniqid($linkDest);
+
+    if(!rename($linkDest, $tmp)) {
+        return;
+    }
+
+    if(!link($linkSource, $linkDest)) {
+        rename($tmp, $linkDest);
+        return;
+    }
+
+    unlink($tmp);
+
+    passthru('ls -l "'.$linkDest.'"');
+}
+
+function processFile($storageDatabase, $file)
+{
+    $dataPath = getFileDatabasePath($storageDatabase, $file);
+
+    if($dataPath === null) {
+        return;
+    }
+
+    if(!file_exists($dataPath)) {
+        copy($file, $dataPath);
+        chmod($file, 0444);
+
+        return;
+    }
 
 
-		if(fileinode($file)===fileinode($dataPath))
-			return;
+    if(!checkValidDataPath($storageDatabase, $dataPath)) {
+        return;
+    }
 
-		if(!compareFiles($file,$dataPath))
-		{
-			print_r(array('Compare','Error',$file,$dataPath));
-			return;
-		}
 
-		if(!is_writeable($file))
-			return;
+    if(fileinode($file) === fileinode($dataPath)) {
+        return;
+    }
 
-		replaceFileForLink($dataPath,$file);
+    if(!compareFiles($file, $dataPath)) {
+        print_r(array('Compare','Error',$file,$dataPath));
+        return;
+    }
 
-	}
+    if(!is_writeable($file)) {
+        return;
+    }
 
+    replaceFileForLink($dataPath, $file);
+
+}
