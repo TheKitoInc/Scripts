@@ -8,7 +8,7 @@ FOLD=/home/$HOST/MySQL
 
 mkdir -p "$FOLD"
 
-for db in $(mysql -NBA -h $HOST -u $USER -p$PASS -e 'show databases;' | grep -v information_schema)
+for db in $(mysql -NBA -h $HOST -u $USER -p$PASS -e 'show databases;' | grep -v information_schema | grep -v performance_schema | grep -v sys)
 do
         echo Data Base $db
         FOLD_DB="$FOLD/$db"
