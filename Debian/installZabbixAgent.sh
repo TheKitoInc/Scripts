@@ -18,12 +18,14 @@ apt-get install zabbix-agent -y || exit 104
 
 cat /dev/null > /etc/zabbix/zabbix_agentd.conf
 echo 'PidFile=/run/zabbix/zabbix_agentd.pid' >> /etc/zabbix/zabbix_agentd.conf
-echo 'LogFile=/var/log/zabbix-agent/zabbix_agentd.log' >> /etc/zabbix/zabbix_agentd.conf
 echo 'Server=127.0.0.1' >> /etc/zabbix/zabbix_agentd.conf
 echo 'ListenPort=10050' >> /etc/zabbix/zabbix_agentd.conf
 echo 'HostMetadataItem=system.uname' >> /etc/zabbix/zabbix_agentd.conf
 
 echo "ServerActive=127.0.0.1:10051,zabbix.private.$DOMAIN:10051,zabbix.$DOMAIN:10051" >> /etc/zabbix/zabbix_agentd.conf
+
+mkdir -p /var/log/zabbix/
+echo 'LogFile=/var/log/zabbix/zabbix_agentd.log' >> /etc/zabbix/zabbix_agentd.conf
 
 mkdir -p /etc/zabbix/zabbix_agentd.d/
 echo 'Include=/etc/zabbix/zabbix_agentd.d/*.conf' >> /etc/zabbix/zabbix_agentd.conf
