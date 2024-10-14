@@ -40,3 +40,6 @@ CNServer=$HOSTNAME.$DOMAIN
 
 cat "$PKI/pki/reqs/$CNClient.req" | curl -X POST --data-binary @- https://pki.$DOMAIN/csr/$CNClient.csr
 cat "$PKI/pki/reqs/$CNServer.req" | curl -X POST --data-binary @- https://pki.$DOMAIN/csr/$CNServer.csr
+
+curl -X GET "https://pki.$DOMAIN/crt/$CNClient.crt" > /tmp/$CNClient.crt && mv "/tmp/$CNClient.crt" "$PKI/pki/issued/"
+curl -X GET "https://pki.$DOMAIN/crt/$CNServer.crt" > /tmp/$CNServer.crt && mv "/tmp/$CNServer.crt" "$PKI/pki/issued/"
