@@ -25,4 +25,7 @@ echo 'HostMetadataItem=system.uname' >> /etc/zabbix/zabbix_agentd.conf
 
 echo "ServerActive=127.0.0.1:10051,zabbix.private.$DOMAIN:10051,zabbix.$DOMAIN:10051" >> /etc/zabbix/zabbix_agentd.conf
 
+mkdir -p /etc/zabbix/zabbix_agentd.d/
+echo 'Include=/etc/zabbix/zabbix_agentd.d/*.conf' >> /etc/zabbix/zabbix_agentd.conf
+
 /etc/init.d/zabbix-agent restart
