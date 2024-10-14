@@ -4,7 +4,7 @@ export DEBIAN_FRONTEND=noninteractive;
 
 FQDN=$(grep -m 1 . /etc/hostname)
 FQDN=${FQDN,,}
-DOMAIN=$(echo $FQDN| cut -d. -f2-255)
+DOMAIN=$(echo $FQDN | cut -d. -f2-255)
 
 apt-get update || exit 101
 apt-get install curl -y || exit 102
