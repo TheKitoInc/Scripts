@@ -12,6 +12,7 @@ if %errorLevel% == 0 (
 	net stop "Zabbix Agent"
 
 	echo. > "%ProgramFiles%\Zabbix Agent\zabbix_agentd.conf"
+
 	echo LogFile=%ProgramFiles%\Zabbix Agent\zabbix_agentd.log  >> "%ProgramFiles%\Zabbix Agent\zabbix_agentd.conf"	
 
 	echo Server=127.0.0.1 >> "%ProgramFiles%\Zabbix Agent\zabbix_agentd.conf"
