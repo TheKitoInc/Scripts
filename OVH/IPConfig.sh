@@ -61,3 +61,9 @@ echo "network: {config: disabled}" > /etc/cloud/cloud.cfg.d/99-disable-network-c
 
 rm /etc/resolv.conf
 echo "nameserver 1.1.1.1" > /etc/resolv.conf
+
+
+cat /dev/null > /etc/supervisor/conf.d/net-$NIC.conf
+echo "[program:net-$NIC]" >> /etc/supervisor/conf.d/net-$NIC.conf
+echo "command = /opt/kito/scripts/net-$NIC.sh" >> /etc/supervisor/conf.d/net-$NIC.conf
+
