@@ -6,7 +6,11 @@ if %errorLevel% == 0 (
 	echo Instalando/Actualizando Zabbix Agent
 
 	set MSIInstall=%~dp0install.msi
-	powershell -Command "(New-Object Net.WebClient).DownloadFile('https://cdn.zabbix.com/zabbix/binaries/stable/7.0/7.0.4/zabbix_agent-7.0.4-windows-amd64-openssl.msi', '%MSIInstall%')"
+
+	IF NOT EXIST "%MSIInstall%" (
+		powershell -Command "(New-Object Net.WebClient).DownloadFile('https://cdn.zabbix.com/zabbix/binaries/stable/7.0/7.0.4/zabbix_agent-7.0.4-windows-amd64-openssl.msi', '%MSIInstall%')"
+	)
+
 	msiexec /passive /i "%MSIInstall%" SERVER=127.0.0.1
 
 	net stop "Zabbix Agent"
