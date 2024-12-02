@@ -14,7 +14,7 @@ do
 
         mkdir -p "$DST" && \
         mkdir -p "$HST" && \
-        rsync -arv --delete-after --delete -b --backup-dir="$HST" "$SRC" "$DST"
+        rsync -arv --safe-links --delete-after --delete -b --backup-dir="$HST" "$SRC" "$DST"
 
         find "$HST" -type f -exec touch "{}" \;
 done
