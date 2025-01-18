@@ -13,7 +13,6 @@ mkdir -p "$FOLDER_MOUNT"
 
 
 SRC=$FOLDER_MOUNT/Respaldo/
-SRC_Shadow=$FOLDER_MOUNT/Respaldo/ShadowCopy
 DST=/Storage/Master/$HOST/Drive_c/Respaldo/
 HST=/Storage/History/$HOST/$(date "+%Y/%m/%d/%H")/Drive_c/Respaldo/
 
@@ -23,10 +22,9 @@ echo HST: $HST
 
 mkdir -p "$DST" && \
 mkdir -p "$HST" && \
-rsync -arv --exclude "ShadowCopy" --remove-source-files --delete-after --delete -b --backup-dir="$HST" "$SRC" "$DST" && \
+rsync -arv --exclude "\$RECYCLE.BIN" --exclude "System Volume Information" --remove-source-files --delete-after --delete -b --backup-dir="$HST" "$SRC" "$DST" && \
 find "$SRC"             -depth -type f -mtime +30 ! -ipath "*/ShadowCopy/*"  -exec rm -v "{}" \; && \
 find "$SRC" -mindepth 2 -depth -type d -empty                                -exec rmdir -v "{}" \; && \
-rsync -arvu                        						 --delete-after --delete -b --backup-dir="$HST" "$SRC_Shadow" "$DST" && \
 fdupes -drN "$HST" && \
 find "$HST" -type f ! -name "*.gz" ! -name "*.bz2" -exec gzip -fv "{}" \; && \
 find "$HST" -type f -exec touch "{}" \; 
