@@ -1,3 +1,4 @@
+# Remove conflicting packages
 for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do
   apt-get remove $pkg -y
 done
