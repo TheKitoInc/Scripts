@@ -2,6 +2,13 @@
 
 # Prevent script to continue if an error occurs
 set -e
+
+# Check if script is running as root
+if [ "$EUID" -ne 0 ]; then
+  echo "Please run this script as root"
+  exit 1
+fi
+
 # Remove conflicting packages
 for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do
   apt-get remove $pkg -y
