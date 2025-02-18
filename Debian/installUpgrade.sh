@@ -21,6 +21,9 @@ deb-src http://security.debian.org/debian-security stable-security/updates main
 # Prevent apt from showing prompts
 export DEBIAN_FRONTEND=noninteractive
 
+# Update package list
+apt-get update
+
 mkdir -p /opt/kito/scripts/
 
 echo "#/bin/bash
@@ -42,7 +45,6 @@ exit 0
 
 chmod +x /opt/kito/scripts/upgradeSystem.sh
 
-apt-get update
 apt-get install cron -y
 apt-get install supervisor -y
 apt-get install rsync -y
