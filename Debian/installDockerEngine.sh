@@ -2,10 +2,13 @@ for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do
 
 # Update package list
 apt-get update
+
 # Install necessary dependencies
 apt-get install ca-certificates curl -y
+
 # Create directory for apt keyrings
 install -m 0755 -d /etc/apt/keyrings
+
 # Download and add Docker's GPG key
 curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
 chmod a+r /etc/apt/keyrings/docker.asc
