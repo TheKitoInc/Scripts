@@ -37,8 +37,10 @@ apt-get install net-tools -y
 apt-get install iptables -y
 apt-get install ipset -y
 
+# Create directory for scripts
 mkdir -p /opt/kito/scripts/
 
+# Create script to upgrade system
 echo "#/bin/bash
 
 export DEBIAN_FRONTEND=noninteractive;
@@ -56,8 +58,11 @@ exit 0
 
 " > /opt/kito/scripts/upgradeSystem.sh
 
+# Make script executable
 chmod +x /opt/kito/scripts/upgradeSystem.sh
 
+# Schedule script to run periodically
 cat /etc/crontab | grep "/opt/kito/scripts/upgradeSystem.sh"          || (echo "$(shuf -i 0-59 -n 1) $(shuf -i 0-23 -n 1)      * * $(shuf -i 0-6 -n 1) root    /opt/kito/scripts/upgradeSystem.sh" >> /etc/crontab) && (/etc/init.d/cron reload)
 
+# Run script to upgrade system
 /opt/kito/scripts/upgradeSystem.sh
