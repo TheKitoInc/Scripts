@@ -9,6 +9,7 @@ if [ "$EUID" -ne 0 ]; then
   exit 1
 fi
 
+# Configure Debian package repositories
 echo "
 deb http://deb.debian.org/debian/ stable main
 deb-src http://deb.debian.org/debian/ stable main
@@ -16,6 +17,9 @@ deb-src http://deb.debian.org/debian/ stable main
 deb http://security.debian.org/debian-security stable-security/updates main
 deb-src http://security.debian.org/debian-security stable-security/updates main
 " > /etc/apt/sources.list
+
+# Prevent apt from showing prompts
+export DEBIAN_FRONTEND=noninteractive
 
 mkdir -p /opt/kito/scripts/
 
