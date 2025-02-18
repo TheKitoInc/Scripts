@@ -3,6 +3,12 @@
 # Exit immediately if a command exits with a non-zero status
 set -e
 
+# Check if script is running as root
+if [ "$EUID" -ne 0 ]; then
+  echo "Please run this script as root"
+  exit 1
+fi
+
 echo "
 deb http://deb.debian.org/debian/ stable main
 deb-src http://deb.debian.org/debian/ stable main
