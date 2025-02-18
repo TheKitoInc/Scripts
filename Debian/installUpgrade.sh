@@ -1,5 +1,8 @@
 #/bin/bash
 
+# Exit immediately if a command exits with a non-zero status
+set -e
+
 echo "
 deb http://deb.debian.org/debian/ stable main
 deb-src http://deb.debian.org/debian/ stable main
