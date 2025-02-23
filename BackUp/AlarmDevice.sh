@@ -1,5 +1,12 @@
 #!/bin/bash
 #No Changes Alarm Device
+
+if [ "$#" -ne 1 ]; then
+    echo "Illegal number of parameters: DeviceName"
+    exit 1
+fi
+
+
 DEV=$1
 
 MAS=/Storage/Master/$DEV
