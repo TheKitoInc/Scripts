@@ -10,34 +10,22 @@ if [[ -z "$INSTANCE" || -z "$PORT" ]]; then
   exit 1
 fi
 
-# Check if volume already exists
+# Check if volume exists
 VOLUME_EXISTS=$(docker volume ls -q -f name="^${DATA_VOLUME}$")
+DOCKER_ARGS=(--rm --name "mariadb_${INSTANCE}" -v "${DATA_VOLUME}:/var/lib/mysql" -p "${PORT}:3306")
 
 if [[ -z "$VOLUME_EXISTS" ]]; then
-  echo "No data volume found, initializing MariaDB volume: $DATA_VOLUME"
+  echo "📦 No data volume found, initializing MariaDB volume: $DATA_VOLUME"
+  docker volume create "$DATA_VOLUME" >/dev/null
 
-  # Generate random root password
   ROOT_PASSWORD=$(openssl rand -base64 32)
-  echo "New MariaDB root password for '${INSTANCE}':"
+  echo "🔐 New MariaDB root password for '${INSTANCE}':"
   echo "$ROOT_PASSWORD"
-
-  # Create and initialize volume in a temporary container
-  docker run --rm \
-    --name "mariadb_init_${INSTANCE}" \
-    -e MARIADB_ROOT_PASSWORD="$ROOT_PASSWORD" \
-    -v "${DATA_VOLUME}":/var/lib/mysql \
-    $IMAGE \
-    --log-bin=mysqld-bin --binlog-format=ROW
-
-  echo "MariaDB volume initialized and container exited"
+  DOCKER_ARGS+=(-e "MARIADB_ROOT_PASSWORD=${ROOT_PASSWORD}")
 else
-  echo "Volume ${DATA_VOLUME} already exists — skipping init"
+  echo "📦 Volume ${DATA_VOLUME} already exists — skipping init"
+  # Don't add env vars — MariaDB ignores them on existing volume
 fi
 
-# Start the persistent container (no password env needed)
-echo "Starting MariaDB container '${INSTANCE}' on port ${PORT}"
-docker run -d --rm \
-  --name "mariadb_${INSTANCE}" \
-  -v "${DATA_VOLUME}":/var/lib/mysql \
-  -p "${PORT}:3306" \
-  $IMAGE
+echo "🚀 Starting MariaDB container '${INSTANCE}' on port ${PORT}"
+docker run -d "${DOCKER_ARGS[@]}" "$IMAGE"
