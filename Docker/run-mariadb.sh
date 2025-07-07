@@ -5,11 +5,6 @@ PORT="${2:-3306}"
 DATA_VOLUME="mariadb_data_${INSTANCE}"
 IMAGE="mariadb:latest"
 
-if [[ -z "$INSTANCE" || -z "$PORT" ]]; then
-  echo "Usage: $0 <instance-name> <host-port>"
-  exit 1
-fi
-
 # Check if volume exists
 VOLUME_EXISTS=$(docker volume ls -q -f name="^${DATA_VOLUME}$")
 DOCKER_ARGS=(--rm --name "mariadb_${INSTANCE}" -v "${DATA_VOLUME}:/var/lib/mysql" -p "${PORT}:3306")
