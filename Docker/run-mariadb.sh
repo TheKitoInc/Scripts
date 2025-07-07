@@ -28,4 +28,4 @@ else
 fi
 
 echo "🚀 Starting MariaDB container '${INSTANCE}' on port ${PORT}"
-docker run -d "${DOCKER_ARGS[@]}" "$IMAGE"
+docker run "${DOCKER_ARGS[@]}" "$IMAGE"
