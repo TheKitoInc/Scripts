@@ -1,7 +1,7 @@
 #!/bin/bash
 
-INSTANCE="$1"
-PORT="$2"
+INSTANCE="${1:-default}"
+PORT="${2:-3306}"
 DATA_VOLUME="mariadb_data_${INSTANCE}"
 IMAGE="mariadb:latest"
 
