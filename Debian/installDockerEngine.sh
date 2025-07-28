@@ -40,7 +40,7 @@ apt-get update
 apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 
 # Disable iptables in Docker configuration
-echo '{"iptables": false}' > /etc/docker/daemon.json
+echo '{"iptables": false, "ipv6": true, "fixed-cidr-v6": "fd00:dead:beef::/64"}' > /etc/docker/daemon.json
 
 # Restart Docker service
 systemctl restart docker
