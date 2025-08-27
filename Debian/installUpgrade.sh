@@ -43,6 +43,9 @@ mkdir -p /opt/kito/scripts/
 # Create script to upgrade system
 echo "#/bin/bash
 
+# Exit immediately if a command exits with a non-zero status
+set -e
+
 export DEBIAN_FRONTEND=noninteractive;
 
 apt-get update
