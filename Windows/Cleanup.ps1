@@ -37,7 +37,9 @@ $cleanmgrItems = @(
     "Windows Error Reporting Archive Files",
     "Windows Error Reporting Queue Files",
     "Windows Error Reporting System Archive Files",
-    "Windows Error Reporting System Queue Files"
+    "Windows Error Reporting System Queue Files",
+    "Windows ESD installation files",
+    "Windows Upgrade Log Files"
 )
 
 foreach ($item in $cleanmgrItems) {
