@@ -22,7 +22,7 @@ NODENETD=10.128.$(( 4*$NODEID + 3))
 export DEBIAN_FRONTEND=noninteractive;
 
 apt-get update || exit 1
-apt-get install openvpn openvpn-dco-dkms -y || exit 2
+apt-get install linux-headers-$(uname -r) openvpn openvpn-dco-dkms -y || exit 2
 
 [ ! -d "/etc/openvpn/server" ] || (rmdir "/etc/openvpn/server") || exit 16
 [ ! -d "/etc/openvpn/client" ] || (rmdir "/etc/openvpn/client") || exit 17
