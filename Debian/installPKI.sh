@@ -1,45 +1,74 @@
-#/bin/bash
+#!/bin/bash
+set -Eeuo pipefail
 
-export DEBIAN_FRONTEND=noninteractive;
+trap 'echo "❌ Error on line $LINENO: $BASH_COMMAND" >&2' ERR
 
-apt-get update || exit 101
-apt-get install easy-rsa curl -y || exit 102
-
+export DEBIAN_FRONTEND=noninteractive
 export EASYRSA_BATCH=1
-EASYRSA=/usr/share/easy-rsa/easyrsa
-PKI=/etc
 
-FQDN=$(grep -m 1 . /etc/hostname)
+apt-get update
+apt-get install -y easy-rsa curl
+
+EASYRSA="/usr/share/easy-rsa/easyrsa"
+PKI="/etc"
+
+# Get hostname / domain
+FQDN=$(head -n1 /etc/hostname)
 FQDN=${FQDN,,}
-DOMAIN=$(echo $FQDN| cut -d. -f2-255)
+DOMAIN=$(echo "$FQDN" | cut -d. -f2-255)
 FQDN=${FQDN^^}
-HOSTNAME=$(echo $FQDN | cut -d. -f1)
+HOSTNAME=$(echo "$FQDN" | cut -d. -f1)
 
-CNClient=$HOSTNAME
-CNServer=$HOSTNAME.$DOMAIN
+CNClient="$HOSTNAME"
+CNServer="$HOSTNAME.$DOMAIN"
 
-[ -d "$PKI/pki" ] || (cd "$PKI" && $EASYRSA init-pki) || exit 121
+# Init PKI if needed
+if [ ! -d "$PKI/pki" ]; then
+    (cd "$PKI" && "$EASYRSA" init-pki)
+fi
 
-[ -d "$PKI/pki/reqs/" ] || (mkdir "$PKI/pki/reqs/") || exit 131
-[ -d "$PKI/pki/issued/" ] || (mkdir "$PKI/pki/issued/") || exit 132
-[ -d "$PKI/pki/private/" ] || (mkdir "$PKI/pki/private/") || exit 133
+# Ensure directories exist
+mkdir -p \
+    "$PKI/pki/reqs" \
+    "$PKI/pki/issued" \
+    "$PKI/pki/private"
 
-[ -f "$PKI/pki/dh.pem" ] || (cd "$PKI" && $EASYRSA gen-dh) || exit 141
+# Generate DH params if missing
+if [ ! -f "$PKI/pki/dh.pem" ]; then
+    (cd "$PKI" && "$EASYRSA" gen-dh)
+fi
 
-[ -f "$PKI/pki/reqs/$CNClient.req" ] || (cd "$PKI" && $EASYRSA gen-req $CNClient nopass) || exit 151
-[ -f "$PKI/pki/reqs/$CNServer.req" ] || (cd "$PKI" && $EASYRSA gen-req $CNServer nopass) || exit 152
+# Generate cert requests if missing
+if [ ! -f "$PKI/pki/reqs/$CNClient.req" ]; then
+    (cd "$PKI" && "$EASYRSA" gen-req "$CNClient" nopass)
+fi
 
-[ -L "$PKI/pki/reqs/client.req" ] || (cd "$PKI/pki/reqs/" && ln -s $CNClient.req client.req) || exit 161
-[ -L "$PKI/pki/reqs/server.req" ] || (cd "$PKI/pki/reqs/" && ln -s $CNServer.req server.req) || exit 162
+if [ ! -f "$PKI/pki/reqs/$CNServer.req" ]; then
+    (cd "$PKI" && "$EASYRSA" gen-req "$CNServer" nopass)
+fi
 
-[ -L "$PKI/pki/private/client.key" ] || (cd "$PKI/pki/private/" && ln -s $CNClient.key client.key) || exit 171
-[ -L "$PKI/pki/private/server.key" ] || (cd "$PKI/pki/private/" && ln -s $CNServer.key server.key) || exit 172
+# Symlinks
+ln -sf "$CNClient.req" "$PKI/pki/reqs/client.req"
+ln -sf "$CNServer.req" "$PKI/pki/reqs/server.req"
 
-[ -L "$PKI/pki/issued/client.crt" ] || (cd "$PKI/pki/issued/" && ln -s $CNClient.crt client.crt) || exit 181
-[ -L "$PKI/pki/issued/server.crt" ] || (cd "$PKI/pki/issued/" && ln -s $CNServer.crt server.crt) || exit 182
+ln -sf "$CNClient.key" "$PKI/pki/private/client.key"
+ln -sf "$CNServer.key" "$PKI/pki/private/server.key"
 
-cat "$PKI/pki/reqs/$CNClient.req" | curl -X POST --data-binary @- https://pki.$DOMAIN/csr/$CNClient.csr
-cat "$PKI/pki/reqs/$CNServer.req" | curl -X POST --data-binary @- https://pki.$DOMAIN/csr/$CNServer.csr
+ln -sf "$CNClient.crt" "$PKI/pki/issued/client.crt"
+ln -sf "$CNServer.crt" "$PKI/pki/issued/server.crt"
 
-curl -X GET "https://pki.$DOMAIN/crt/$CNClient.crt" > /tmp/$CNClient.crt && mv "/tmp/$CNClient.crt" "$PKI/pki/issued/"
-curl -X GET "https://pki.$DOMAIN/crt/$CNServer.crt" > /tmp/$CNServer.crt && mv "/tmp/$CNServer.crt" "$PKI/pki/issued/"
+# Upload CSRs
+curl -f -X POST --data-binary @"$PKI/pki/reqs/$CNClient.req" \
+    "https://pki.$DOMAIN/csr/$CNClient.csr"
+
+curl -f -X POST --data-binary @"$PKI/pki/reqs/$CNServer.req" \
+    "https://pki.$DOMAIN/csr/$CNServer.csr"
+
+# Download certificates safely
+curl -f -o "/tmp/$CNClient.crt" "https://pki.$DOMAIN/crt/$CNClient.crt"
+mv "/tmp/$CNClient.crt" "$PKI/pki/issued/"
+
+curl -f -o "/tmp/$CNServer.crt" "https://pki.$DOMAIN/crt/$CNServer.crt"
+mv "/tmp/$CNServer.crt" "$PKI/pki/issued/"
+
+echo "✅ PKI setup completed successfully"
