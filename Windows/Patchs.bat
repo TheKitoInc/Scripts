@@ -24,3 +24,13 @@ if "%OS_VER%"=="10" reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Feed
 
 :: --- Disable Hybrid Sleep / Hibernation ---
 if "%IS_ADMIN%"=="1" powercfg -h off
+
+:: --- Disable Hardened UNC Paths (netlogon) ---
+if "%IS_ADMIN%"=="1" reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\NetworkProvider\HardenedPaths" /v "\\\\*\\netlogon" /t REG_SZ /d "RequireMutualAuthentication=0,RequireIntegrity=0,RequirePrivacy=0" /f
+
+:: --- SMB compatibility tweaks (Windows 11 only) ---
+if "%IS_ADMIN%"=="1" if "%OS_VER%"=="11" reg add "HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters" /v EnablePlainTextPassword /t REG_DWORD /d 0 /f
+if "%IS_ADMIN%"=="1" if "%OS_VER%"=="11" reg add "HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters" /v EnableSecuritySignature /t REG_DWORD /d 1 /f
+if "%IS_ADMIN%"=="1" if "%OS_VER%"=="11" reg add "HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters" /v RequireSecuritySignature /t REG_DWORD /d 0 /f
+rem if "%IS_ADMIN%"=="1" if "%OS_VER%"=="11" reg add "HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters" /v ServiceDllUnloadOnStop /t REG_DWORD /d 1 /f
+rem if "%IS_ADMIN%"=="1" if "%OS_VER%"=="11" reg add "HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters" /v AllowInsecureGuestAuth /t REG_DWORD /d 1 /f
