@@ -48,3 +48,7 @@ if "%IS_ADMIN%"=="1" powercfg -change -hibernate-timeout-dc 0
 if "%IS_ADMIN%"=="1" w32tm /config /manualpeerlist:"pool.ntp.org" /syncfromflags:manual /reliable:no /update
 if "%IS_ADMIN%"=="1" sc config w32time start= auto >nul
 w32tm /resync /nowait >nul
+
+:: --- Disable Web Search (Start Menu Bing) ---
+reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /v BingSearchEnabled /t REG_DWORD /d 0 /f
+if "%IS_ADMIN%"=="1" reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v DisableWebSearch /t REG_DWORD /d 1 /f
