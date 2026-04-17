@@ -16,6 +16,7 @@ if "%IS_ADMIN%"=="1" reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\Termin
 if "%IS_ADMIN%"=="1" reg add "HKLM\SOFTWARE\Policies\Microsoft\Dsh" /v AllowNewsAndInterests /t REG_DWORD /d 0 /f
 
 :: --- Disable taskbar weather ---
+if "%OS_VER%"=="11" reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /f
 if "%OS_VER%"=="11" reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v TaskbarDa /t REG_DWORD /d 0 /f
 if "%OS_VER%"=="10" reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Feeds" /v ShellFeedsTaskbarViewMode /t REG_DWORD /d 2 /f
 
