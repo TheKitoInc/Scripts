@@ -34,3 +34,12 @@ if "%IS_ADMIN%"=="1" if "%OS_VER%"=="11" reg add "HKLM\SYSTEM\CurrentControlSet\
 if "%IS_ADMIN%"=="1" if "%OS_VER%"=="11" reg add "HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters" /v RequireSecuritySignature /t REG_DWORD /d 0 /f
 rem if "%IS_ADMIN%"=="1" if "%OS_VER%"=="11" reg add "HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters" /v ServiceDllUnloadOnStop /t REG_DWORD /d 1 /f
 rem if "%IS_ADMIN%"=="1" if "%OS_VER%"=="11" reg add "HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters" /v AllowInsecureGuestAuth /t REG_DWORD /d 1 /f
+
+:: --- Power settings (High Performance, no sleep) ---
+if "%IS_ADMIN%"=="1" powercfg -setactive SCHEME_MIN
+if "%IS_ADMIN%"=="1" powercfg -change -disk-timeout-ac 0
+if "%IS_ADMIN%"=="1" powercfg -change -disk-timeout-dc 0
+if "%IS_ADMIN%"=="1" powercfg -change -standby-timeout-ac 0
+if "%IS_ADMIN%"=="1" powercfg -change -standby-timeout-dc 0
+if "%IS_ADMIN%"=="1" powercfg -change -hibernate-timeout-ac 0
+if "%IS_ADMIN%"=="1" powercfg -change -hibernate-timeout-dc 0
