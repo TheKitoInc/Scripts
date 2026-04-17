@@ -4,13 +4,10 @@
 net session >nul 2>&1 && set IS_ADMIN=1 || set IS_ADMIN=0
 
 :: --- OS version check ---
-for /f "tokens=4-5 delims=. " %%i in ('ver') do (
-    set VERSION=%%i
-    set BUILD=%%j
-)
-
+for /f %%i in ('wmic os get BuildNumber ^| findstr [0-9]') do set BUILD=%%i
 if %BUILD% GEQ 22000 set OS_VER=11
 if %BUILD% LSS 22000 set OS_VER=10
+echo Build detected: %BUILD%
 
 :: --- Disable RDP UDP ---
 if "%IS_ADMIN%"=="1" reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services\Client" /v fClientDisableUDP /t REG_DWORD /d 0 /f && echo UDP enabled
