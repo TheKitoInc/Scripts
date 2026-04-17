@@ -43,3 +43,8 @@ if "%IS_ADMIN%"=="1" powercfg -change -standby-timeout-ac 0
 if "%IS_ADMIN%"=="1" powercfg -change -standby-timeout-dc 0
 if "%IS_ADMIN%"=="1" powercfg -change -hibernate-timeout-ac 0
 if "%IS_ADMIN%"=="1" powercfg -change -hibernate-timeout-dc 0
+
+:: --- NTP configuration ---
+if "%IS_ADMIN%"=="1" w32tm /config /manualpeerlist:"pool.ntp.org" /syncfromflags:manual /reliable:no /update
+if "%IS_ADMIN%"=="1" sc config w32time start= auto >nul
+w32tm /resync /nowait >nul
