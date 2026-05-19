@@ -4,6 +4,9 @@ cls
 :: =========================================
 :: ULTRAVNC LOG CLEANUP
 :: =========================================
+
+call "%~dp0showTitle.bat" "UltraVNC Log Cleaner"
+
 echo Cleaning UltraVNC logs...
 
 net stop uvnc_service >nul 2>&1
