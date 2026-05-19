@@ -4,6 +4,9 @@ cls
 :: =========================================
 :: BRAVE CACHE
 :: =========================================
+
+call "%~dp0showTitle.bat" "Brave Browser Cache Cleaner"
+
 echo Cleaning Brave Browser cache...
 
 taskkill /f /im brave.exe >nul 2>&1
