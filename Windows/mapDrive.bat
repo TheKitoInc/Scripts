@@ -1,4 +1,6 @@
 @echo off
+title Network Drive Mapper
+color 0A
 cls
 
 :: =========================================
@@ -11,24 +13,35 @@ if "%~2"=="" goto :usage
 set DRIVE=%~1
 set SHARE=%~2
 
-echo Connecting network drive %DRIVE%...
-echo Share: %SHARE%
+title Network Drive Mapper %DRIVE%:
+
+echo =========================================
+echo         Network Drive Mapper
+echo =========================================
+echo.
+echo Drive Letter : %DRIVE%:
+echo Network Path : %SHARE%
 echo.
 
-:: Remove existing mapping
+echo Removing existing mapping...
 net use %DRIVE%: /delete /y >nul 2>&1
 
-:: Create new mapping
+echo Creating new mapping...
 net use %DRIVE%: "%SHARE%"
 
+echo.
+
 if %errorlevel%==0 (
-    echo.
-    echo Drive mapped successfully.
+    echo =========================================
+    echo Successfully mapped %DRIVE%:
+    echo =========================================
 ) else (
-    echo.
-    echo Failed to map drive.
+    echo =========================================
+    echo Failed to map %DRIVE%:
+    echo =========================================
 )
 
+echo.
 exit /b 0
 
 :: =========================================
@@ -36,12 +49,18 @@ exit /b 0
 :: =========================================
 
 :usage
+
+echo =========================================
+echo         Network Drive Mapper
+echo =========================================
 echo.
 echo Usage:
-echo %~nx0 Z \\SERVER\Share
+echo.
+echo    %~nx0 Z \\SERVER\Share
 echo.
 echo Example:
-echo %~nx0 X \\NAS\Public
+echo.
+echo    %~nx0 X \\NAS\Public
 echo.
 
 exit /b 1
