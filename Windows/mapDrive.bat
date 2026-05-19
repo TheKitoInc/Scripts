@@ -1,7 +1,8 @@
 @echo off
+cls
+
 title Network Drive Mapper
 color 0A
-cls
 
 :: =========================================
 :: Network Drive Mapper
