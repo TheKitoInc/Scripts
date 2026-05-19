@@ -4,6 +4,9 @@ cls
 :: =========================================
 :: FIREFOX CACHE
 :: =========================================
+
+call "%~dp0showTitle.bat" "Firefox Cache Cleaner"
+
 echo Cleaning Firefox cache...
 
 taskkill /f /im firefox.exe >nul 2>&1
