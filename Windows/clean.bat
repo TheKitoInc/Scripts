@@ -59,6 +59,10 @@ if exist "%BASEDIR%cleanRecycleBin.bat" (
     call "%BASEDIR%cleanRecycleBin.bat"
 )
 
+if exist "%BASEDIR%cleanPrinters.bat" (
+    call "%BASEDIR%cleanPrinters.bat"
+)
+
 echo.
 echo User cleanup tasks completed.
 echo.
