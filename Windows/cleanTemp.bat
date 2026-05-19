@@ -4,6 +4,9 @@ cls
 :: =========================================
 :: TEMP FILES
 :: =========================================
+
+call "%~dp0showTitle.bat" "TEMP Folders Cleaner"
+
 echo Cleaning TEMP folders...
 
 del /f /s /q "%TEMP%\*" >nul 2>&1
