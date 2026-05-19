@@ -4,6 +4,9 @@ cls
 :: =========================================
 :: MICROSOFT EDGE CACHE
 :: =========================================
+
+call "%~dp0showTitle.bat" "Microsoft Edge Cache Cleaner"
+
 echo Cleaning Microsoft Edge cache...
 
 taskkill /f /im msedge.exe >nul 2>&1
