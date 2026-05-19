@@ -13,7 +13,6 @@ if "%~2"=="" goto :usage
 set DRIVE=%~1
 set SHARE=%~2
 
-title Network Drive Mapper %DRIVE%:
 
 echo =========================================
 echo         Network Drive Mapper
@@ -42,7 +41,8 @@ if %errorlevel%==0 (
 )
 
 echo.
-exit /b 0
+timeout /t 3
+exit
 
 :: =========================================
 :: Usage
@@ -63,4 +63,5 @@ echo.
 echo    %~nx0 X \\NAS\Public
 echo.
 
-exit /b 1
+timeout /t 10
+exit
