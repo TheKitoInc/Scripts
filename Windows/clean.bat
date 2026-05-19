@@ -107,5 +107,3 @@ if "%IS_ADMIN%"=="1" (
 echo.
 echo Cleanup completed.
 
-timeout /t 3 >nul
-exit
