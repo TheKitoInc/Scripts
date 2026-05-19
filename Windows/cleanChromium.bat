@@ -4,6 +4,9 @@ cls
 :: =========================================
 :: CHROMIUM CACHE
 :: =========================================
+
+call "%~dp0showTitle.bat" "Chromium Cache Cleaner"
+
 echo Cleaning Chromium cache...
 
 taskkill /f /im chromium.exe >nul 2>&1
