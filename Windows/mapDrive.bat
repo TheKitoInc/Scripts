@@ -41,7 +41,7 @@ if %errorlevel%==0 (
 )
 
 echo.
-exit
+goto :end
 
 :: =========================================
 :: Usage
@@ -62,5 +62,4 @@ echo.
 echo    %~nx0 X \\NAS\Public
 echo.
 
-timeout /t 10
-exit
+:end
