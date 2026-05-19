@@ -4,6 +4,9 @@ cls
 :: =========================================
 :: GOOGLE CHROME CACHE
 :: =========================================
+
+call "%~dp0showTitle.bat" "Google Chrome Cache Cleaner"
+
 echo Cleaning Google Chrome cache...
 
 taskkill /f /im chrome.exe >nul 2>&1
