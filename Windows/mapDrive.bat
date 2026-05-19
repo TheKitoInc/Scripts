@@ -1,8 +1,7 @@
 @echo off
 cls
 
-title Network Drive Mapper
-color 0A
+call "%~dp0showTitle.bat" "Network Drive Mapper"
 
 :: =========================================
 :: Network Drive Mapper
@@ -14,11 +13,6 @@ if "%~2"=="" goto :usage
 set DRIVE=%~1
 set SHARE=%~2
 
-
-echo =========================================
-echo         Network Drive Mapper
-echo =========================================
-echo.
 echo Drive Letter : %DRIVE%:
 echo Network Path : %SHARE%
 echo.
