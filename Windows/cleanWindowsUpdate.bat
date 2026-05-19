@@ -4,6 +4,9 @@ cls
 :: =========================================
 :: WINDOWS UPDATE CACHE
 :: =========================================
+
+call "%~dp0showTitle.bat" "Windows Update Cache Cleaner"
+
 echo Cleaning Windows Update cache...
 
 net stop wuauserv >nul 2>&1
