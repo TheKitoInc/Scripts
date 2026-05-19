@@ -3,13 +3,15 @@ cls
 
 setlocal
 
+call "%~dp0showTitle.bat" "Cleanup Launcher"
+
 :: =========================================
 :: Cleanup Framework Launcher
 :: =========================================
 
 set BASEDIR=%~dp0
 
-title Cleanup Launcher
+
 
 :: =========================================
 :: Detect Administrator
