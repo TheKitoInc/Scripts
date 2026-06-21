@@ -45,9 +45,10 @@ if docker image inspect "$VERSION_IMAGE" >/dev/null 2>&1; then
     echo "[SKIP] Image already exists: $VERSION_IMAGE"
 else
     echo "[BUILD] Building $VERSION_IMAGE"
-    docker build -t "$VERSION_IMAGE" "$REPO_PATH"
+    docker build -t "$VERSION_IMAGE" "$REPO_PATH"    
 fi
 
+# 4. Ensure latest tag points to it
 docker tag "$VERSION_IMAGE" "$LATEST_IMAGE"
 
 echo "[OK] Latest -> $VERSION_IMAGE"
