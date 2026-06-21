@@ -40,7 +40,7 @@ apt-get update
 apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 
 # Disable iptables in Docker configuration
-echo '{"iptables": false, "ipv6": true}' > /etc/docker/daemon.json
+#echo '{"iptables": false, "ipv6": true}' > /etc/docker/daemon.json
 
 # Restart Docker service
 systemctl restart docker
@@ -49,4 +49,4 @@ systemctl restart docker
 # docker network create --ipv6 main
 
 # Verify Docker installation
-docker run hello-world
+docker run -rm hello-world
