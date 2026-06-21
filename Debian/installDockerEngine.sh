@@ -49,4 +49,4 @@ systemctl restart docker
 # docker network create --ipv6 main
 
 # Verify Docker installation
-docker run -rm hello-world
+docker run --rm hello-world
