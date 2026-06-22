@@ -5,9 +5,9 @@ cls
 :: ONEDRIVE REMOVAL
 :: =========================================
 
-call "%~dp0showTitle.bat" "OneDrive Removal"
+call "%~dp0Helpers\showTitle.bat" "OneDrive Removal"
 
-call "%~dp0checkElevated.bat"
+call "%~dp0Helpers\checkElevated.bat"
 
 taskkill /F /IM OneDrive.exe
 
@@ -48,6 +48,6 @@ reg delete "HKEY_CLASSES_ROOT\LibraryFolder\shellex\ContextMenuHandlers\OneDrive
 :: Remove OneDrive folders
 rd /s /q "%USERPROFILE%\OneDrive" >nul 2>&1
 
-call "%~dp0restartExplorer.bat"
+call "%~dp0Helpers\restartExplorer.bat"
 
-call "%~dp0showDone.bat"
+call "%~dp0Helpers\showDone.bat"
