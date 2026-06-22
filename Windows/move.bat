@@ -5,7 +5,7 @@ cls
 :: MOVE FILES AND FOLDERS
 :: =========================================
 
-call "%~dp0showTitle.bat" "Moving %~1 > %~2"
+call "%~dp0Helpers\showTitle.bat" "Moving %~1 > %~2"
 
 echo Moving files and folders from "%~1" to "%~2"...
 
@@ -15,4 +15,4 @@ MKDIR "%MoveDirDestination%"
 FOR    %%i IN ("%MoveDirSource%\*") DO           MOVE /Y "%%i" "%MoveDirDestination%\%%~nxi"
 FOR /D %%i IN ("%MoveDirSource%\*") DO ROBOCOPY /MOVE /E "%%i" "%MoveDirDestination%\%%~nxi"
 
-call "%~dp0showDone.bat"
+call "%~dp0Helpers\showDone.bat"
