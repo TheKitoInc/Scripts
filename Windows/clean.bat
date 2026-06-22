@@ -3,7 +3,7 @@ cls
 
 setlocal
 
-call "%~dp0showTitle.bat" "Cleanup Launcher"
+call "%~dp0Helpers\showTitle.bat" "Cleanup Launcher"
 
 :: =========================================
 :: Cleanup Framework Launcher
