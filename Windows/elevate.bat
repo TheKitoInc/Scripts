@@ -4,7 +4,7 @@
 fltmc >nul 2>&1
 if not %errorlevel%==0 (
     echo Elevating privileges...
-    powershell -NoProfile -ExecutionPolicy Bypass -Command "Start-Process -FilePath '%~f0' -Verb RunAs"
+    powershell -Command "Start-Process '%~f0' -Verb RunAs"
     exit /b
 )
 
