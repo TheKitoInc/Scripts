@@ -5,7 +5,7 @@ cls
 :: MICROSOFT EDGE CACHE
 :: =========================================
 
-call "%~dp0showTitle.bat" "Microsoft Edge Cache Cleaner"
+call "%~dp0Helpers\showTitle.bat" "Microsoft Edge Cache Cleaner"
 
 echo Cleaning Microsoft Edge cache...
 
@@ -15,4 +15,4 @@ rd /s /q "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Cache" >nul 2>&1
 rd /s /q "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Code Cache" >nul 2>&1
 rd /s /q "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\GPUCache" >nul 2>&1
 
-call "%~dp0showDone.bat"
+call "%~dp0Helpers\showDone.bat"
