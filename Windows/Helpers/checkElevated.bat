@@ -6,8 +6,6 @@
 
 net session >nul 2>&1
 if %errorlevel% neq 0 (
-    color 0C
-    echo This script requires elevated privileges. Please run as administrator.   
-    timeout /t 5
+    call "%~dp0\showError.bat" "This task requires administrative privileges. Please run the script as an administrator."    
     exit 
 )
