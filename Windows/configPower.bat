@@ -11,4 +11,4 @@ powercfg -change -standby-timeout-dc 0
 powercfg -change -hibernate-timeout-ac 0
 powercfg -change -hibernate-timeout-dc 0
 
-call "%~dp0Helpers\showDone.bat"
+call "%~dp0Helpers\showSuccess.bat"
