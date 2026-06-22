@@ -13,4 +13,4 @@ echo Cleaning Prefetch...
 
 del /f /s /q "C:\Windows\Prefetch\*" >nul 2>&1
 
-call "%~dp0Helpers\showDone.bat"
+call "%~dp0Helpers\showSuccess.bat"
