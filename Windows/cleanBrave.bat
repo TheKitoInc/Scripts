@@ -14,5 +14,6 @@ taskkill /f /im brave.exe >nul 2>&1
 rd /s /q "%LOCALAPPDATA%\BraveSoftware\Brave-Browser\User Data\Default\Cache" >nul 2>&1
 rd /s /q "%LOCALAPPDATA%\BraveSoftware\Brave-Browser\User Data\Default\Code Cache" >nul 2>&1
 rd /s /q "%LOCALAPPDATA%\BraveSoftware\Brave-Browser\User Data\Default\GPUCache" >nul 2>&1
+rd /s /q "%LOCALAPPDATA%\BraveSoftware\Brave-Browser\User Data\Default\Service Worker\CacheStorage" >nul 2>&1
 
 call "%~dp0Helpers\showSuccess.bat"
