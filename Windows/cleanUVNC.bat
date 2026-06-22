@@ -19,4 +19,4 @@ if exist "C:\Program Files (x86)\uvnc bvba\UltraVNC\WinVNC.log" (
 
 net start uvnc_service >nul 2>&1
 
-call "%~dp0Helpers\showDone.bat"
+call "%~dp0Helpers\showSuccess.bat"
