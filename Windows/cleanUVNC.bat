@@ -7,6 +7,8 @@ cls
 
 call "%~dp0showTitle.bat" "UltraVNC Log Cleaner"
 
+call "%~dp0checkElevated.bat"
+
 echo Cleaning UltraVNC logs...
 
 net stop uvnc_service >nul 2>&1
