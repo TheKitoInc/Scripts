@@ -5,3 +5,5 @@ echo Done.
 echo.
 
 timeout /t 1 >nul
+
+cls
