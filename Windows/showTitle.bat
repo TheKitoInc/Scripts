@@ -1,7 +1,7 @@
 @echo off
 cls
 
-color 0A
+color 0E
 title %~1
 
 echo =========================================
