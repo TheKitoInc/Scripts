@@ -7,7 +7,7 @@ cls
 
 call "%~dp0showTitle.bat" "OneDrive Removal"
 
-call "%~dp0elevate.bat"
+call "%~dp0checkElevated.bat"
 
 taskkill /F /IM OneDrive.exe
 
