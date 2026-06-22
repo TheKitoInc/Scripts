@@ -5,12 +5,12 @@ cls
 :: DISK CLEANUP
 :: =========================================
 
-call "%~dp0showTitle.bat" "Disk Cleanup"
+call "%~dp0Helpers\showTitle.bat" "Disk Cleanup"
 
-call "%~dp0checkElevated.bat"
+call "%~dp0Helpers\checkElevated.bat"
 
 echo Running Disk Cleanup...
 
 cleanmgr /sagerun:1
 
-call "%~dp0showDone.bat"
+call "%~dp0Helpers\showDone.bat"
