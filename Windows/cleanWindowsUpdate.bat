@@ -5,9 +5,9 @@ cls
 :: WINDOWS UPDATE CACHE
 :: =========================================
 
-call "%~dp0showTitle.bat" "Windows Update Cache Cleaner"
+call "%~dp0Helpers\showTitle.bat" "Windows Update Cache Cleaner"
 
-call "%~dp0checkElevated.bat"
+call "%~dp0Helpers\checkElevated.bat"
 
 echo Cleaning Windows Update cache...
 
@@ -20,4 +20,4 @@ for /d %%x in ("C:\Windows\SoftwareDistribution\Download\*") do rd /s /q "%%x" >
 net start wuauserv >nul 2>&1
 net start bits >nul 2>&1
 
-call "%~dp0showDone.bat"
+call "%~dp0Helpers\showDone.bat"
