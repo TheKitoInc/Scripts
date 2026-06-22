@@ -20,4 +20,4 @@ for /d %%x in ("C:\Windows\SoftwareDistribution\Download\*") do rd /s /q "%%x" >
 net start wuauserv >nul 2>&1
 net start bits >nul 2>&1
 
-call "%~dp0Helpers\showDone.bat"
+call "%~dp0Helpers\showSuccess.bat"
