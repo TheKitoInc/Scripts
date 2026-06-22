@@ -11,5 +11,4 @@ echo Running DISM component cleanup...
 
 DISM /Online /Cleanup-Image /StartComponentCleanup
 
-echo Done.
-echo.
+call "%~dp0showDone.bat"
