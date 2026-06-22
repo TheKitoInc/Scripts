@@ -5,7 +5,7 @@ cls
 :: BRAVE CACHE
 :: =========================================
 
-call "%~dp0showTitle.bat" "Brave Browser Cache Cleaner"
+call "%~dp0Helpers\showTitle.bat" "Brave Browser Cache Cleaner"
 
 echo Cleaning Brave Browser cache...
 
@@ -15,4 +15,4 @@ rd /s /q "%LOCALAPPDATA%\BraveSoftware\Brave-Browser\User Data\Default\Cache" >n
 rd /s /q "%LOCALAPPDATA%\BraveSoftware\Brave-Browser\User Data\Default\Code Cache" >nul 2>&1
 rd /s /q "%LOCALAPPDATA%\BraveSoftware\Brave-Browser\User Data\Default\GPUCache" >nul 2>&1
 
-call "%~dp0showDone.bat"
+call "%~dp0Helpers\showDone.bat"
