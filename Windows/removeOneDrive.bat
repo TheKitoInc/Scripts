@@ -50,4 +50,4 @@ rd /s /q "%USERPROFILE%\OneDrive" >nul 2>&1
 
 call "%~dp0Helpers\restartExplorer.bat"
 
-call "%~dp0Helpers\showDone.bat"
+call "%~dp0Helpers\showSuccess.bat"
