@@ -1,7 +1,7 @@
 @echo off
 cls
 
-call "%~dp0showTitle.bat" "Configure NTP Service"
+call "%~dp0Helpers\showTitle.bat" "Configure NTP Service"
 
 :: Set your preferred NTP servers here (you can change pool.ntp.org to another)
 set NTP_SERVERS=pool.ntp.org
@@ -29,4 +29,4 @@ w32tm /query /configuration | findstr /C:"NtpServer"
 w32tm /query /status
 echo ==========================================
 
-call "%~dp0showDone.bat"
+call "%~dp0Helpers\showDone.bat"
