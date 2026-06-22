@@ -7,6 +7,8 @@ cls
 
 call "%~dp0showTitle.bat" "Moving %~1 > %~2"
 
+echo Moving files and folders from "%~1" to "%~2"...
+
 SET MoveDirSource=%~1
 SET MoveDirDestination=%~2
 MKDIR "%MoveDirDestination%"
