@@ -11,5 +11,4 @@ echo Emptying Recycle Bin...
 
 powershell -Command "Clear-RecycleBin -Force" >nul 2>&1
 
-echo Done.
-echo.
+call "%~dp0showDone.bat"
