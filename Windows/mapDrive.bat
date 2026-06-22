@@ -1,7 +1,7 @@
 @echo off
 cls
 
-call "%~dp0showTitle.bat" "Network Drive Mapper"
+call "%~dp0Helpers\showTitle.bat" "Network Drive Mapper"
 
 :: =========================================
 :: Network Drive Mapper
