@@ -17,5 +17,4 @@ if exist "C:\Program Files (x86)\uvnc bvba\UltraVNC\WinVNC.log" (
 
 net start uvnc_service >nul 2>&1
 
-echo Done.
-echo.
+call "%~dp0showDone.bat"
