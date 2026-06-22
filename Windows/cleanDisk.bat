@@ -13,4 +13,4 @@ echo Running Disk Cleanup...
 
 cleanmgr /sagerun:1
 
-call "%~dp0Helpers\showDone.bat"
+call "%~dp0Helpers\showSuccess.bat"
