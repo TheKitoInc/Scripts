@@ -28,4 +28,5 @@ echo ==========================================
 w32tm /query /configuration | findstr /C:"NtpServer"
 w32tm /query /status
 echo ==========================================
-echo Done.
+
+call "%~dp0showDone.bat"
