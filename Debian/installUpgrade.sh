@@ -11,11 +11,14 @@ fi
 
 # Configure Debian package repositories
 echo "
-deb http://deb.debian.org/debian/ stable main
-deb-src http://deb.debian.org/debian/ stable main
+deb http://deb.debian.org/debian stable main
+deb-src http://deb.debian.org/debian stable main
 
-deb http://security.debian.org/debian-security stable-security/updates main
-deb-src http://security.debian.org/debian-security stable-security/updates main
+deb http://deb.debian.org/debian stable-updates main
+deb-src http://deb.debian.org/debian stable-updates main
+
+deb http://security.debian.org/debian-security stable-security main
+deb-src http://security.debian.org/debian-security stable-security main
 " > /etc/apt/sources.list
 
 # Prevent apt from showing prompts
