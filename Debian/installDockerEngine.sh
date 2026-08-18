@@ -46,7 +46,7 @@ echo '{"iptables": false, "ipv6": false}' > /etc/docker/daemon.json
 systemctl restart docker
 
 # Create new main network
-docker network create --ipv6 br-main
+docker network create br-main
 
 # Verify Docker installation
 docker run --rm hello-world
