@@ -191,6 +191,8 @@ log "Preparing web root"
 mkdir -p "$WEB_ROOT"
 mkdir -p "$WEB_ROOT/public"
 
+[ ! -f "$WEB_ROOT/public/index.php" ] && echo "<?php phpinfo();" > "$WEB_ROOT/public/index.php"
+
 find "$WEB_ROOT" -type d -exec chmod 755 {} +
 find "$WEB_ROOT" -type f -exec chmod 644 {} +
 
