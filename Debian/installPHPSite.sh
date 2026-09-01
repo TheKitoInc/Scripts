@@ -87,7 +87,7 @@ log "Configuring NGINX"
 mkdir -p /etc/nginx/sites-available
 mkdir -p /etc/nginx/sites-enabled
 
-WEB_ROOT="/var/www/"
+WEB_ROOT="/var/www"
 
 cat > /etc/nginx/sites-available/main <<EOF
 server {
