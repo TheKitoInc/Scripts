@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+if ! command -v dig >/dev/null 2>&1; then
+    echo "=== Installing dig ==="
+    apt-get update
+    apt-get install -y dnsutils
+fi
+
 echo "=== Updating hostname from PTR ==="
 
 IP="$(hostname -I | awk '{print $1}')"
