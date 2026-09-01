@@ -2,6 +2,9 @@
 
 set -e
 
+# Prevent apt from showing prompts
+export DEBIAN_FRONTEND=noninteractive
+
 echo "=== Updating system ==="
 apt update -y 
 apt upgrade -y
