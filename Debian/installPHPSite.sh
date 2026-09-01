@@ -6,13 +6,13 @@ set -e
 export DEBIAN_FRONTEND=noninteractive
 
 echo "=== Updating system ==="
-apt update -y 
-apt upgrade -y
+apt-get update -y
+apt-get upgrade -y
 
 echo "=== Installing base packages ==="
-apt install -y ssl-cert
-apt install -y nginx 
-apt install -y php-fpm php-mysql php-cli php-curl php-gd php-mbstring php-xml php-zip php-bcmath php-intl php-redis
+apt-get install -y ssl-cert
+apt-get install -y nginx
+apt-get install -y php-fpm php-mysql php-cli php-curl php-gd php-mbstring php-xml php-zip php-bcmath php-intl php-redis
 
 PHP_VERSION=$(php -r "echo PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION;")
 
@@ -67,7 +67,7 @@ server {
 }
 EOF
 
-rm -f /etc/nginx/sites-enabled/default
+rm -f /etc/nginx/sites-enabled/*
 ln -s /etc/nginx/sites-available/main /etc/nginx/sites-enabled/
 
 # ----------------------------
@@ -76,7 +76,7 @@ ln -s /etc/nginx/sites-available/main /etc/nginx/sites-enabled/
 
 echo "=== Tuning PHP-FPM ==="
 
-PHP_POOL="/etc/php/$PHP_VERSION/fpm/pool.d/[www.conf](http://www.conf)"
+PHP_POOL="/etc/php/$PHP_VERSION/fpm/pool.d/www.conf"
 
 sed -i "s/^pm = .*/pm = dynamic/" $PHP_POOL
 sed -i "s/^pm.max_children = .*/pm.max_children = 25/" $PHP_POOL
