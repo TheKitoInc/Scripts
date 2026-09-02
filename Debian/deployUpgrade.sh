@@ -77,8 +77,9 @@ echo
 # ------------------------------------------------------------------------------
 
 if [[ -f /var/run/reboot-required ]]; then
-    echo "WARNING: Reboot is required."
-    echo "WARNING: Reboot was not performed automatically."
+    echo "WARNING: System upgrade completed, will reboot now to apply changes."
+    sleep 5
+    reboot 
 else
     echo "=== No reboot required ==="
 fi
