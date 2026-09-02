@@ -3,6 +3,7 @@ set -euo pipefail
 
 if ! command -v dig >/dev/null 2>&1; then
     echo "=== Installing dig ==="
+    export DEBIAN_FRONTEND=noninteractive
     apt-get update
     apt-get install -y dnsutils
 fi
